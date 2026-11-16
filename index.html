@@ -11,7 +11,7 @@
 body{margin:0;background:#5A1A86}
 a{color:#FFFFFF}a:hover{color:#F3E8FF}
 .ng *{box-sizing:border-box}
-.ng-wrap{container-type:inline-size;width:100%;max-width:min(1440px,160vh);margin:0 auto;position:relative;z-index:2}
+.ng-wrap{container-type:inline-size;width:100%;max-width:160vh;margin:0 auto;position:relative;z-index:2}
 .ng-stage{position:relative;width:100%;aspect-ratio:16 / 10}
 .ng-abs{position:absolute}
 .ng-abs img{display:block;width:100%;height:auto}
@@ -177,6 +177,12 @@ footer a{color:#FFFFFF}
 .ng-moving .ng-sticker{animation:ngWobble 3.2s ease-in-out infinite}
 @keyframes ngWobble{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(-4deg) scale(1.07)}}
 @media (prefers-reduced-motion:reduce){.ng-moving .ng-sticker{animation:none}}
+.ng-gutter{position:absolute;top:0;bottom:0;width:calc((100% - 160vh) / 2);display:none;z-index:1;pointer-events:none}
+.ng-gl{left:0}.ng-gr{right:0}
+@media (min-aspect-ratio:168/100){.ng-gutter{display:block}}
+.ng-gi{position:absolute;left:50%}
+.ng-gi img{display:block;width:100%;height:auto;filter:drop-shadow(0 1.2vh 2vh rgba(30,0,40,.35))}
+.ng-moving .ng-gi img.ng-float{animation-duration:7s}
 </style>
 </head>
 <body>
@@ -187,6 +193,16 @@ footer a{color:#FFFFFF}
 <div aria-hidden="true" class="ng-bg " style="background: radial-gradient(ellipse 55% 50% at 50% 40%, #4DB57D 0%, #2B8656 45%, #144F31 100%)"></div>
 <div aria-hidden="true" class="ng-bg " style="background: radial-gradient(ellipse 55% 50% at 50% 40%, #8C7B72 0%, #5B4B44 45%, #2B2220 100%)"></div>
 <div aria-hidden="true" class="ng-bg " style="background: radial-gradient(ellipse 55% 50% at 50% 40%, #E9A043 0%, #C2701F 45%, #76390B 100%)"></div>
+<div class="ng-gutter ng-gl" aria-hidden="true">
+<div class="ng-gi" style="top: 8%; width: min(62%, 17vh); transform: translateX(-50%) rotate(-14deg);"><img class="ng-float " src="assets/casquinha-chocolate.png" alt=""></div>
+<div class="ng-gi" style="top: 47%; width: min(40%, 9vh); transform: translateX(-50%) rotate(0deg); filter: blur(1.5px);"><img class="ng-float d2" src="assets/framboesa_esq.png" alt=""></div>
+<div class="ng-gi" style="top: 60%; width: min(56%, 15vh); transform: translateX(-50%) rotate(10deg);"><img class="ng-float d3" src="assets/casquinha-menta.png" alt=""></div>
+</div>
+<div class="ng-gutter ng-gr" aria-hidden="true">
+<div class="ng-gi" style="top: 10%; width: min(62%, 17vh); transform: translateX(-50%) rotate(13deg);"><img class="ng-float d2" src="assets/casquinha-caramelo.png" alt=""></div>
+<div class="ng-gi" style="top: 45%; width: min(52%, 12vh); transform: translateX(-50%) rotate(-6deg);"><img class="ng-float d3" src="assets/morangos.png" alt=""></div>
+<div class="ng-gi" style="top: 62%; width: min(56%, 15vh); transform: translateX(-50%) rotate(-10deg);"><img class="ng-float " src="assets/casquinha-cookies.png" alt=""></div>
+</div>
 <div class="ng-wrap">
 <div class="ng-stage">
 <div aria-hidden="true" class="ng-sprinkles">
