@@ -165,6 +165,18 @@ footer a{color:#FFFFFF}
 @media (max-width:860px){.ng-tcards{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:600px){.ng-fgrid{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){.ng-moving .ng-s4 .ng-r4,.ng-moving .ng-s4 .ng-star,.ng-moving .ng-s4 .ng-quote,.ng-moving .ng-pote4,.ng-moving .ng-s4 .ng-swoosh path{animation:none !important;opacity:1 !important}}
+.ng-count{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.ng-cl{font-size:16px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#7A2440}
+.ng-cbx{display:flex;align-items:center;gap:8px}
+.ng-cbx i{font-style:normal;font-weight:800;font-size:24px;color:#C2185B}
+.ng-cb{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;padding:8px 6px 6px;border-radius:14px;background:#FFFFFF;box-shadow:0 6px 16px rgba(194,24,91,.14);border:1.5px solid #F6C6D7}
+.ng-cb b{font-family:Oswald,Impact,sans-serif;font-weight:700;font-size:30px;line-height:1;color:#3A1410;font-variant-numeric:tabular-nums}
+.ng-cb small{font-size:12px;font-weight:600;color:#9A4A63;margin-top:3px}
+.ng-sticker{position:absolute;right:4%;top:-4%;width:108px;height:108px;border-radius:999px;background:#FFD23F;color:#B0124F;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Oswald,Impact,sans-serif;font-weight:700;font-size:22px;line-height:1.02;transform:rotate(-12deg);box-shadow:0 10px 22px rgba(176,18,79,.25),inset 0 0 0 4px rgba(255,255,255,.55);z-index:2}
+.ng-sticker::before{content:"";position:absolute;inset:6px;border-radius:999px;border:2px dashed rgba(176,18,79,.35)}
+.ng-moving .ng-sticker{animation:ngWobble 3.2s ease-in-out infinite}
+@keyframes ngWobble{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(-4deg) scale(1.07)}}
+@media (prefers-reduced-motion:reduce){.ng-moving .ng-sticker{animation:none}}
 </style>
 </head>
 <body>
@@ -462,7 +474,12 @@ Oferta por Tempo Limitado
 Peça Agora
 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="ng-vera" style="width: 20px; height: 20px"><path d="M9 5 L16 12 L9 19"/></svg>
 </a>
+<div class="ng-count" role="timer" aria-label="Tempo restante da oferta">
+<span class="ng-cl">Termina hoje em</span>
+<span class="ng-cbx"><span class="ng-cb"><b id="ng-hh">00</b><small>horas</small></span><i>:</i><span class="ng-cb"><b id="ng-mm">00</b><small>min</small></span><i>:</i><span class="ng-cb"><b id="ng-ss">00</b><small>seg</small></span></span>
 </div>
+</div>
+<div class="ng-sticker" aria-hidden="true"><span>LEVE 2</span><span>PAGUE 1</span></div>
 <div class="ng-casq3" style="position: absolute; right: -9%; bottom: -6%; width: 38%">
 <svg aria-hidden="true" viewBox="0 0 40 40" fill="none" stroke="#E0115F" stroke-width="3.2" stroke-linecap="round" class="ng-burst" style="position: absolute; right: -6px; top: -8px; width: 40px; height: 40px; z-index: 1"><path d="M8 26 L18 10 M20 30 L34 18 M14 34 L30 34"/></svg>
 <img src="assets/casq3.png" alt="Casquinha de sorvete de morango com creme" style="display: block; width: 100%; height: auto">
@@ -627,6 +644,14 @@ Peça Agora
     }, { threshold: 0.18 });
     secs.forEach(function (el) { io.observe(el); });
   }
+  var hh = document.getElementById('ng-hh'), mm = document.getElementById('ng-mm'), ss = document.getElementById('ng-ss');
+  function p2(v) { return (v < 10 ? '0' : '') + v; }
+  function tick() {
+    var now = new Date(), end = new Date(now); end.setHours(24, 0, 0, 0);
+    var left = Math.max(0, Math.floor((end - now) / 1000));
+    hh.textContent = p2(Math.floor(left / 3600)); mm.textContent = p2(Math.floor(left / 60) % 60); ss.textContent = p2(left % 60);
+  }
+  tick(); setInterval(tick, 1000);
   var form = document.getElementById('ng-news');
   form.addEventListener('submit', function (e) {
     e.preventDefault();
